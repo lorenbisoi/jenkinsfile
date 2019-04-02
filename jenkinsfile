@@ -1,6 +1,6 @@
 node {
     stage ('Checkout from Github') {
-        git 'https://github.com/lorenbisoi/my-app.git'
+        git 'https://github.com/lorenbisoi/jenkinsfile.git'
     }
     stage ('Build') {
         sh 'mvn install'
