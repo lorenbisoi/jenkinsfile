@@ -1,0 +1,14 @@
+node {
+    stage ('Checkout from Github') {
+        git 'https://github.com/lorenbisoi/my-app.git'
+    }
+    stage ('Build') {
+        sh 'mvn install'
+    }
+    stage ('Deployment to Tomcat') {
+        sh 'sshpass -p "lorenbisoi" scp /home/loren/.jenkins/workspace/pipeline2/target/*.war tomcat@172.17.0.2:/usr/local/tomcat/webapps'
+    }
+    stage ('Starting the server') {
+        sh 'sshpass -p "lorenbisoi" ssh tomcat@172.17.0.2 /usr/local/tomcat/bin/startup.sh'
+    }
+}
